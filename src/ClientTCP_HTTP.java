@@ -1,16 +1,18 @@
 import java.io.*;
 import java.net.Socket;
 
-public class ClientTCP {
+public class ClientTCP_HTTP {
 
     public static void main(String[] args) throws IOException {
-        String serverAddress = "localhost";
-        int serverPort = 8000;
+        String serverAddress = "128.119.245.12";
+        int serverPort = 80;
+
+        String requestHeaderLine1 = "HEAD /ethereal-labs/lab2-1.html HTTP/1.1";
+        String requestHeaderLine2 = "Host: gaia.cs.umass.edu";
 
         log("Connecting to the server: " + serverAddress + ":" + serverPort);
         Socket clientConnection = new Socket(serverAddress, serverPort);
         log("Connected to the server: " + serverAddress + ":" + serverPort);
-
         log("Streams collecting");
         InputStream is = clientConnection.getInputStream();
         OutputStream os = clientConnection.getOutputStream();
@@ -19,14 +21,16 @@ public class ClientTCP {
         BufferedReader br = new BufferedReader(isr);
         BufferedWriter bw = new BufferedWriter(osw);
 
-        log("Sending requests");
-        bw.write("Hello server!");
+        log("Sending request header line 1: " + requestHeaderLine1);
+        bw.write(requestHeaderLine1);
+        bw.newLine();
+        bw.write(requestHeaderLine2);
         bw.newLine();
         bw.newLine();
         bw.flush();
 
         log("Response receiving");
-        String response;
+        String response = null;
         int i = 1;
         while ((response = br.readLine()) != null) {
             log("Response received " + i + ": " + response);
