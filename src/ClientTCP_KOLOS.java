@@ -10,16 +10,25 @@ public class ClientTCP_KOLOS {
         BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
 
-        bw.write("s29441 wRxRuLsnQF");
-        bw.newLine();
-        bw.flush();
 
-//        odbieranie haseł + zadań
+//      //////////////////////////////
+//      odbieranie haseł + zadań
 
+//        bw.write("s29441 s29441");
+//        bw.newLine();
+//        bw.flush();
+//
 //        String response = "";
 //        while ((response = br.readLine()) != null) {
 //            System.out.println(response);
 //        }
+
+//      //////////////////////////////
+//      rozwiązywanie zadań
+
+        bw.write("s29441 wRxRuLsnQF");
+        bw.newLine();
+        bw.flush();
 
         { // 1
             System.out.println("#1");
@@ -78,7 +87,7 @@ public class ClientTCP_KOLOS {
             }
             System.out.println("S: "+br.readLine());
         }
-        { // 5
+        { // 5 - NIE DZIAŁA
             System.out.println("#5");
             int K2 = 0;
             ArrayList<String> liczby = new ArrayList<>();
